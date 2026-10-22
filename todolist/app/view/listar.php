@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>To-Do List</title>
     <style>
+
         .modal {
             display: none;
             position: fixed;
@@ -13,6 +14,7 @@
             height: 100%;
             background-color: rgba(0, 0, 0, 0.5);
         }
+        
         .modal-conteudo {
             background-color: white;
             width: 400px;
@@ -20,6 +22,7 @@
             padding: 20px;
             border-radius: 10px;
         }
+
     </style>
 </head>
 <body>
