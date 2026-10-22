@@ -65,5 +65,7 @@
 
     </script>
 
+    <a href="../login/index.php?action=logout">Sair</a> <!--Adicionei um botão para encerrar a sessão-->
+
 </body>
 </html>

@@ -48,7 +48,7 @@ Class UsuarioController{
             $_SESSION['id'] = $usuario['id'];
             $_SESSION['nome'] = $usuario['nome'];
 
-            header("Location: index.php?action=painel");
+            header("Location: ../todolist/"); //Alterei o redicionamento para o to-do list
             exit;
         }
 

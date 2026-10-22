@@ -1,5 +1,13 @@
 <?php
 
+session_start(); //Agora só da pra entrar no to-do list via login
+
+if (!isset($_SESSION['id'])){
+
+    header("Location: ../login/");
+    exit;
+}
+
 require_once __DIR__ . '/app/controller/tarefaController.php'; 
 
 $controller = new tarefaController(); 
