@@ -7,7 +7,7 @@ Class Database {
     private $senha = '';
     private $banco = 'login';
 
-    public $conexao;
+    public mysqli $conexao;
 
     public function conectar(){
 

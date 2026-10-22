@@ -4,7 +4,7 @@ require_once __DIR__ . '/../config/database.php';
 
 Class Usuario{
 
-    private $conexao;
+    private mysqli $conexao;
 
     public function __construct(){
 
@@ -12,7 +12,7 @@ Class Usuario{
         $this -> conexao = $db -> conectar();
     }
 
-    public function buscarPorEmail(){
+    public function buscarPorEmail(string $email){
 
         $sql = "SELECT * FROM usuarios WHERE email = ?";
         $stmt = $this -> conexao -> prepare($sql);

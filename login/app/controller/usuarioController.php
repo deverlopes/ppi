@@ -1,14 +1,14 @@
 <?php
 
-require_once __DIR__ . '/../config/database.php';
+require_once __DIR__ . '/../model/usuario.php';
 
 Class UsuarioController{
 
-    private $usuarioModel;
+    private Usuario $usuarioModel;
 
     public function __construct(){
 
-        $this -> usuarioModel = new Usuario();
+        $this -> usuarioModel = new Usuario(); 
     }
 
     public function index(){
@@ -23,22 +23,26 @@ Class UsuarioController{
     }
 
     public function autenticar(){
-           
-        if (isset($_POST['email'], $_POST['senha'])){
+
+        if (!isset($_POST['email'], $_POST['senha'])){
 
             header("Location: index.php");
             exit;
         }
 
+        $email = $_POST['email'];
+        $senha = $_POST['senha'];
+
         if (empty($email) || empty($senha)){
 
             $erro = "Preencha seu email e senha";
             include __DIR__ . '/../view/login.php';
+            exit;
         }
 
         $usuario = $this -> usuarioModel -> buscarPorEmail($email);
 
-        if ($usuario && password_verify($senha, $usuario('senha'))){
+        if ($usuario && password_verify($senha, $usuario['senha'])){
 
             session_regenerate_id(true);
             $_SESSION['id'] = $usuario['id'];
