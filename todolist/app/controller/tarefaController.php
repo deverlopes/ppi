@@ -11,20 +11,25 @@ class tarefaController{
         $this->tarefaModel = new Tarefa(); 
     }
 
-    public function index(){
+    public function index(){// concertei conforme o model pediu
 
-        $tarefas = $this -> tarefaModel -> listar(); 
-        include __DIR__ . '/../view/listar.php'; 
+        $usuario_id = $_SESSION['id'];
+        $tarefas = $this -> tarefaModel -> listar($usuario_id);
+        include __DIR__ . '/../view/listar.php';
     }
 
-    public function criar(){ 
 
-        if (isset($_POST['descricao']) && !empty(trim($_POST['descricao']))){
+    public function criar() { //editei também assim como no model
 
-            $this -> tarefaModel -> criar($_POST['descricao']);
-        } 
+        if (isset($_POST['descricao']) && !empty(trim($_POST['descricao']))) {
+
+            $descricao = trim($_POST['descricao']);
+            $usuario_id = $_SESSION['id'];
+            $this -> tarefaModel -> criar($descricao, $usuario_id);
+        }
 
         header("Location: index.php");
+        exit;
     }
 
     public function excluir(){

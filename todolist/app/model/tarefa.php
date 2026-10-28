@@ -12,28 +12,35 @@ class Tarefa{
         $this -> conexao = $db -> conectar();
     }
 
-    public function listar(): array {
+    public function listar(int $usuario_id): array{// Editei o método editar para filtrar as tarefas por id
 
-        $tarefas = []; 
-        $sql = "SELECT * FROM tarefas ORDER BY data_criacao DESC"; 
-        $resultado = $this -> conexao -> query($sql); 
+        $tarefas = [];
 
-        if ($resultado -> num_rows > 0){
+        $sql = "SELECT * FROM tarefas WHERE usuario_id = ? ORDER BY data_criacao DESC";
 
-            while($row = $resultado -> fetch_assoc()){
+        $stmt = $this -> conexao -> prepare($sql);
+        $stmt -> bind_param("i", $usuario_id);
+        $stmt -> execute();
 
-                $tarefas[] = $row; 
-            }
+        $resultado = $stmt->get_result();
+
+        while ($row = $resultado->fetch_assoc()) {
+
+            $tarefas[] = $row;
         }
 
-        return $tarefas; 
+        $stmt -> close();
+        return $tarefas;
     }
 
-    public function criar(string $descricao): bool {
+    public function criar(string $descricao, int $usuario_id): bool { //editei a função criar pois estava dando erro
 
-        $descricao = $this -> conexao -> real_escape_string($descricao);
-        $sql = "INSERT INTO tarefas (descricao) VALUES ('$descricao')";
-        return $this -> conexao -> query($sql); 
+        $sql = "INSERT INTO tarefas (descricao, usuario_id) VALUES (?, ?)";
+
+        $stmt = $this -> conexao->prepare($sql);
+        $stmt -> bind_param("si", $descricao, $usuario_id);
+
+        return $stmt -> execute();
     }
 
     public function excluir(int $id): bool {
