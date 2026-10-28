@@ -5,7 +5,7 @@ class Database {
     private $servidor = 'localhost'; 
     private $usuario = 'root'; 
     private $senha = ''; 
-    private $banco = 'todo_list'; 
+    private $banco = 'todolist'; 
 
     public $conexao; 
 

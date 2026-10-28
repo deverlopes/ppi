@@ -5,7 +5,7 @@ Class Database {
     private $servidor = 'localhost';
     private $usuario = 'root';
     private $senha = '';
-    private $banco = 'login';
+    private $banco = 'todolist';
 
     public mysqli $conexao;
 
