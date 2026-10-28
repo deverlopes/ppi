@@ -27,7 +27,9 @@
 </head>
 <body>
 
-    <h1>To-Do List</h1>
+    <h1>To-Do List</h1> 
+    
+    <h2> Bem-vindo, <?php echo htmlspecialchars($_SESSION['nome']); ?>! </h2>
 
     <form action="index.php?action=criar" method="POST">
         <input type="text" name="descricao" placeholder="Descrição da tarefa">
