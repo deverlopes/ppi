@@ -1,6 +1,6 @@
 <?php
 
-session_start();
+session_start();// Adicionei a sessão
 
 require_once __DIR__ . '/app/controller/usuarioController.php';
 

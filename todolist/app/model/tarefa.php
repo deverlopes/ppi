@@ -33,11 +33,11 @@ class Tarefa{
         return $tarefas;
     }
 
-    public function criar(string $descricao, int $usuario_id): bool { //editei a função criar pois estava dando erro
+    public function criar(string $descricao, int $usuario_id): bool {// Editei a função para a nova tabela
 
         $sql = "INSERT INTO tarefas (descricao, usuario_id) VALUES (?, ?)";
 
-        $stmt = $this -> conexao->prepare($sql);
+        $stmt = $this -> conexao -> prepare($sql);
         $stmt -> bind_param("si", $descricao, $usuario_id);
 
         return $stmt -> execute();

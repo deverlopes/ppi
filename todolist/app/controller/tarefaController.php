@@ -11,7 +11,7 @@ class tarefaController{
         $this->tarefaModel = new Tarefa(); 
     }
 
-    public function index(){// concertei conforme o model pediu
+    public function index(){// Concertei adicionando o To-Do List relacionado ao usuário
 
         $usuario_id = $_SESSION['id'];
         $tarefas = $this -> tarefaModel -> listar($usuario_id);
@@ -19,7 +19,7 @@ class tarefaController{
     }
 
 
-    public function criar() { //editei também assim como no model
+    public function criar() {// Editei para ficar funcional com a nova tabela
 
         if (isset($_POST['descricao']) && !empty(trim($_POST['descricao']))) {
 
