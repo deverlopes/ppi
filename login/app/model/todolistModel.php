@@ -43,18 +43,25 @@ class Tarefa{
         return $stmt -> execute();
     }
 
-    public function excluir(int $id): bool {
+    public function excluir(int $id, int $usuario_id): bool {
 
-        $id = intval($id);
-        $sql = "DELETE FROM tarefas WHERE id = $id"; 
-        return $this -> conexao -> query($sql); 
+        $sql = "DELETE FROM tarefas WHERE id = ? AND usuario_id = ?";
+
+        $stmt = $this -> conexao -> prepare($sql);
+        $stmt -> bind_param("ii", $id, $usuario_id);
+
+        return $stmt -> execute();
     }
     
-    public function editar(string $descricao, int $id): bool {
-        
-        $descricao = $this -> conexao -> real_escape_string($descricao);
-        $id = intval($id);
-        $sql = "UPDATE tarefas SET descricao = '$descricao' WHERE id = '$id'";
-        return $this -> conexao -> query($sql); 
+    public function editar(string $descricao, int $id, int $usuario_id): bool {
+
+        $sql = "UPDATE tarefas SET descricao = ? WHERE id = ? AND usuario_id = ?";
+
+        $stmt = $this->conexao->prepare($sql);
+        $stmt -> bind_param("sii", $descricao, $id, $usuario_id);
+
+        return $stmt->execute();
     }
 }
+
+?>

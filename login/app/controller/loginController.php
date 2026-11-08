@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/../model/usuario.php';
+require_once __DIR__ . '/../model/loginModel.php';
 
 Class UsuarioController{
 
@@ -11,15 +11,15 @@ Class UsuarioController{
         $this -> usuarioModel = new Usuario(); 
     }
 
-    public function index(){
+    public function login(){
 
         if(isset($_SESSION['id'])){
 
-            header("Location: index.php?action=painel");
+            header("Location: todolist.php"); //Concertei redirecionamentos
             exit;
         }
 
-        include __DIR__ . '/../view/login.php';
+        include __DIR__ . '/../view/loginView.php';
     }
 
     public function autenticar(){
@@ -36,7 +36,7 @@ Class UsuarioController{
         if (empty($email) || empty($senha)){
 
             $erro = "Preencha seu email e senha";
-            include __DIR__ . '/../view/login.php';
+            include __DIR__ . '/../view/loginView.php';
             exit;
         }
 
@@ -48,23 +48,12 @@ Class UsuarioController{
             $_SESSION['id'] = $usuario['id'];
             $_SESSION['nome'] = $usuario['nome'];
 
-            header("Location: ../todolist/");//Alterei o redicionamento para o to-do list
+            header("Location: todolist.php");//Alterei o redicionamento para o to-do list
             exit;
         }
 
         $erro = "E-mail ou senha estão incorretos";
-        include __DIR__ . '/../view/login.php';
-    }
-
-    public function painel(){
-
-        if (!isset($_SESSION['id'])){
-
-            header("Location: index.php");
-            exit;
-        }
-
-        include __DIR__ . '/../view/painel.php';
+        include __DIR__ . '/../view/loginView.php';
     }
 
     public function logout(){

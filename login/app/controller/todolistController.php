@@ -1,6 +1,6 @@
 <?php 
 
-require_once __DIR__ . '/../model/tarefa.php';
+require_once __DIR__ . '/../model/todolistModel.php';
 
 class tarefaController{
 
@@ -15,7 +15,7 @@ class tarefaController{
 
         $usuario_id = $_SESSION['id'];
         $tarefas = $this -> tarefaModel -> listar($usuario_id);
-        include __DIR__ . '/../view/listar.php';
+        include __DIR__ . '/../view/todolistView.php';
     }
 
 
@@ -28,28 +28,38 @@ class tarefaController{
             $this -> tarefaModel -> criar($descricao, $usuario_id);
         }
 
-        header("Location: index.php");
+        header("Location: todolist.php");// Concertei o destino
         exit;
     }
 
     public function excluir(){
-        if (isset($_GET['id'])){ 
 
-            $this -> tarefaModel -> excluir($_GET['id']);
+        if (isset($_GET['id'])){
+
+            $id = (int) $_GET['id'];
+            $usuario_id = $_SESSION['id'];
+
+            $this -> tarefaModel -> excluir($id, $usuario_id);
         }
 
-        header("Location: index.php"); 
+        header("Location: todolist.php");
+        exit;
     }
 
     public function editar(){
-        
+
         if (isset($_POST['id']) && isset($_POST['descricao']) && !empty(trim($_POST['descricao']))){
-            
-            $this -> tarefaModel -> editar($_POST['descricao'], $_POST['id']);
+
+            $descricao = trim($_POST['descricao']);
+            $id = (int) $_POST['id'];
+            $usuario_id = $_SESSION['id'];
+
+            $this->tarefaModel->editar($descricao, $id, $usuario_id);
         }
 
-        header("Location: index.php");
-    }
+        header("Location: todolist.php");
+        exit;
+}
 }
 
 ?>

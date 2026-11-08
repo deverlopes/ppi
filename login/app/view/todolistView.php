@@ -31,7 +31,7 @@
     
     <h2> Bem-vindo, <?php echo htmlspecialchars($_SESSION['nome']); ?>! </h2>
 
-    <form action="index.php?action=criar" method="POST">
+    <form action="todolist.php?action=criar" method="POST">
         <input type="text" name="descricao" placeholder="Descrição da tarefa">
         <button type="submit">Adicionar</button>
     </form>
@@ -42,9 +42,9 @@
         <ul>
             <?php foreach ($tarefas as $tarefa): ?>
                 <li>
-                    <?php echo ($tarefa['descricao']); ?>
-                    <a href="index.php?action=excluir&id=<?php echo $tarefa['id']; ?>"> Excluir </a>
-                    <a href="#" onclick="abrirModal(<?php echo $tarefa['id']; ?>, '<?php echo ($tarefa['descricao']); ?>');">Editar</a>
+                    <?php echo htmlspecialchars($tarefa['descricao']); ?>
+                    <a href="todolist.php?action=excluir&id=<?php echo $tarefa['id']; ?>"> Excluir </a>
+                    <a href="#" onclick='abrirModal(<?php echo (int) $tarefa["id"]; ?>, <?php echo htmlspecialchars(json_encode($tarefa["descricao"]), ENT_QUOTES, "UTF-8"); ?>)'>Editar</a>
                 </li>
             <?php endforeach; ?>
         </ul>
@@ -52,7 +52,7 @@
         <p>Não há tarefas ainda!</p>
     <?php endif; ?>
 
-    <?php include __DIR__ . '\modalEditar.php'; ?>
+    <?php include __DIR__ . '/editarView.php'; ?>
 
     <script>
 
@@ -70,7 +70,7 @@
 
     </script>
 
-    <a href="../login/index.php?action=logout">Sair</a><!--Adicionei um botão para encerrar a sessão-->
+    <a href="index.php?action=logout">Sair</a><!--Adicionei um botão para encerrar a sessão-->
 
 </body>
 </html>
