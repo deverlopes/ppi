@@ -1,5 +1,7 @@
 <?php
 
+// Testando pull
+
 session_start();// Adicionei a sessão
 
 require_once __DIR__ . '/app/controller/loginController.php';
